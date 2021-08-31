@@ -9,9 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@atlaskit/button": "^16.1.1",
+    "@atlaskit/form": "^8.3.1",
+    "@atlaskit/textfield": "^5.1.1",
+    "firebase": "^9.0.1",
+    "firebase-admin": "^9.11.1",
     "next": "11.1.2",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "styled-components": "^5.3.1"
   },
   "devDependencies": {
     "@types/react": "17.0.19",
