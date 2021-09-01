@@ -1,5 +1,6 @@
 import "../styles/globals.css";
-import UserProvider from "../context/userContext";
+import "semantic-ui-css/semantic.min.css";
+import UserProvider from "../context";
 import type { AppProps } from "next/app";
 
 function MyApp({ Component, pageProps }: AppProps) {
