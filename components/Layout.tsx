@@ -2,32 +2,37 @@ import React from "react";
 import { useUser } from "../context";
 import SignInForm from "./SignInForm";
 import Link from "next/link";
-import styled from "styled-components";
+import { Menu, Input } from "semantic-ui-react";
 
-const Header = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  padding: 4px;
-  border-bottom: 1px solid silver;
-`;
-
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({
+  children,
+  path,
+}: {
+  children: React.ReactNode;
+  path: string;
+}) => {
   const { user, loadingUser } = useUser();
   if (loadingUser) return <div>App is loading</div>;
   if (user.uid)
     return (
       <div>
-        <Header>
-          <Link href="/">
-            <a>Projects</a>
+        <Menu secondary>
+          <Link href="/" passHref>
+            <Menu.Item name="Home" active={path === "Projects"} />
           </Link>
-          <Link href="categories">
-            <a>Categories</a>
+          <Link href="/categories" passHref>
+            <Menu.Item name="Categories" active={path === "Categories"} />
           </Link>
-          <Link href="tools">
-            <a>Tools</a>
+          <Link href="/tools" passHref>
+            <Menu.Item name="Tools" active={path === "Tools"} />
           </Link>
-        </Header>
+          <Menu.Menu position="right">
+            <Menu.Item>
+              <Input icon="search" placeholder="Search..." />
+            </Menu.Item>
+            <Menu.Item name="logout" onClick={() => console.log("logout")} />
+          </Menu.Menu>
+        </Menu>
         <div>{children}</div>
       </div>
     );

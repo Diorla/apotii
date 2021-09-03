@@ -9,7 +9,7 @@ export default function Category() {
 
   if (loadingTools) return <div>Loading tools</div>;
   return (
-    <Layout>
+    <Layout path="Tools">
       {tools.length ? (
         <List>
           {tools.map((item) => (

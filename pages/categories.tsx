@@ -9,7 +9,7 @@ const Categories: NextPage = () => {
     user: { categories = [] },
   } = useUser();
   return (
-    <Layout>
+    <Layout path="Categories">
       <List>
         {categories.map((category, idx) => (
           <List.Content key={idx}>

@@ -1,6 +1,6 @@
-import firebase from "../firebase/init";
+import firebase from "./init";
 import UserProps from "../types/UserProps";
-import initialState from "./initialState";
+import initialState from "../context/initialState";
 
 export default async function fetchUser(
   userId: string,

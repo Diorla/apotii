@@ -9,9 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@atlaskit/button": "^16.1.1",
-    "@atlaskit/form": "^8.3.1",
-    "@atlaskit/textfield": "^5.1.1",
     "@types/uuid": "^8.3.1",
     "firebase": "^9.0.1",
     "firebase-admin": "^9.11.1",

@@ -10,7 +10,7 @@ export default function ProjectCard({ project }: { project: ProjectProps }) {
       <Card.Content>
         <Card.Meta>{new Date(modified).toDateString()}</Card.Meta>
         <Card.Content description={description} />
-        <Link href={`projects/${id}`} passHref>
+        <Link href={`project/${id}`} passHref>
           <Button size="mini" primary>
             Open
           </Button>

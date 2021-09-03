@@ -1,4 +1,4 @@
-import firebase from "../firebase/init";
+import firebase from "./init";
 
 /**
  * Used to fetch and monitor if there are any changes

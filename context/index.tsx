@@ -2,8 +2,8 @@ import { useState, useEffect, createContext, useContext } from "react";
 import firebase from "../firebase/init";
 import UserProps from "../types/UserProps";
 import initialState from "./initialState";
-import fetchList from "./fetchList";
-import fetchUser from "./fetchUser";
+import fetchList from "../firebase/fetchList";
+import fetchUser from "../firebase/fetchUser";
 import ProjectProps from "../types/ProjectProps";
 import ToolProps from "../types/ToolProps";
 import ContextProps from "../types/ContextProps";
@@ -26,8 +26,7 @@ export default function UserContextComp({
     const unsubscriber = firebase.auth().onAuthStateChanged(async (user) => {
       try {
         if (user && user.uid) {
-          fetchUser(user.uid, user, setUser)
-			.then(()=> setLoadingUser(false))
+          fetchUser(user.uid, user, setUser).then(() => setLoadingUser(false));
           fetchList(user.uid, "projects", setProjects)
             .then(() => setLoadingProjects(false))
             .catch((err) => console.error(err));
@@ -36,7 +35,7 @@ export default function UserContextComp({
             .catch((err) => console.error(err));
         } else setUser(initialState.user);
       } catch (error) {
-		console.error(error.message);
+        console.error(error.message);
       }
     });
 

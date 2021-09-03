@@ -1,7 +1,5 @@
-import { useState } from "react";
-import Form, { Field } from "@atlaskit/form";
-import Button from "@atlaskit/button";
-import TextField from "@atlaskit/textfield";
+import React, { useState } from "react";
+import { Button, Form } from "semantic-ui-react";
 import firebase from "../firebase/init";
 
 export function signInWithGoogle(callback?: () => void): void {
@@ -52,19 +50,11 @@ const SignInForm = () => {
         {isNew ? "Already a member" : "New User"}
       </Button>
       <Form onSubmit={(data) => console.log({ data })}>
-        {({ formProps }) => (
-          <form {...formProps}>
-            <Field name="username" defaultValue="" label="User name" isRequired>
-              {({ fieldProps }) => <TextField {...fieldProps} />}
-            </Field>
-            <Field name="password" defaultValue="" label="Password" isRequired>
-              {({ fieldProps }) => <TextField {...fieldProps} />}
-            </Field>
-            <Button type="submit" appearance="primary">
-              {isNew ? "Sign in" : "Sign up"}
-            </Button>
-          </form>
-        )}
+        <form>
+          <Button type="submit" appearance="primary">
+            {isNew ? "Sign in" : "Sign up"}
+          </Button>
+        </form>
       </Form>
     </div>
   );
