@@ -3,38 +3,51 @@ import { Button, Form, Rating, Select, TextArea } from "semantic-ui-react";
 import FormModal from "./FormModal";
 import ToolProps from "../types/ToolProps";
 import addTool from "../firebase/addTool";
+import { useUser } from "../context";
 
 export default function ToolForm({
   setOpenTool,
   openTool,
-  uid,
   tool,
   setTool,
-  options,
+  title = "Add tool",
 }: {
   setOpenTool: React.Dispatch<React.SetStateAction<boolean>>;
   openTool: boolean;
-  uid: string;
   tool: ToolProps;
   setTool: React.Dispatch<React.SetStateAction<ToolProps>>;
-  options: { value: string; text: string }[];
+  title?: string;
 }): JSX.Element {
+  const {
+    user: { uid, categories = [] },
+  } = useUser();
+  const options = [
+    { name: "Misc", description: "The default categories" },
+    ...categories,
+  ].map((item) => {
+    return {
+      value: item.name,
+      text: item.name,
+    };
+  });
   return (
     <FormModal
-      title="Create new tool"
-      trigger={<Button onClick={() => setOpenTool(!openTool)}>New tool</Button>}
+      title="Tool"
+      trigger={<Button onClick={() => setOpenTool(!openTool)}>{title}</Button>}
       open={openTool}
       toggleModal={setOpenTool}
       submit={() =>
         addTool(uid, tool, () => {
           setOpenTool(false);
-          setTool({
-            id: "",
-            name: "",
-            category: "",
-            rating: 1,
-            description: "",
-          });
+          // If it is add a new tool, then reset it
+          !tool.id &&
+            setTool({
+              id: "",
+              name: "",
+              category: "",
+              rating: 1,
+              description: "",
+            });
         })
       }
     >

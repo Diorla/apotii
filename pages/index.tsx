@@ -4,7 +4,7 @@ import { useUser } from "../context";
 import ProjectCard from "../components/ProjectCard";
 import ProjectProps from "../types/ProjectProps";
 import React, { useState } from "react";
-import { Grid } from "semantic-ui-react";
+import { Card, Grid } from "semantic-ui-react";
 import ToolProps from "../types/ToolProps";
 import CategoryProps from "../types/CategoryProps";
 import ProjectForm from "../components/ProjectForm";
@@ -12,13 +12,6 @@ import CategoryForm from "../components/CategoryForm";
 import ToolForm from "../components/ToolForm";
 import styled from "styled-components";
 
-const GridWrapper = styled.div`
-  display: flex;
-  column-gap: 4px;
-  flex-wrap: wrap;
-  align-items: baseline;
-  padding: 4px;
-`;
 const Home: NextPage = () => {
   const {
     user,
@@ -49,16 +42,6 @@ const Home: NextPage = () => {
   });
   const [openCategory, setOpenCategory] = useState(false);
 
-  const options = [
-    { name: "Misc", description: "The default categories" },
-    ...categories,
-  ].map((item) => {
-    return {
-      value: item.name,
-      text: item.name,
-    };
-  });
-
   const categoryError = categories
     .map((item) => item.name)
     .includes(category.name);
@@ -85,18 +68,16 @@ const Home: NextPage = () => {
         <ToolForm
           setOpenTool={setOpenTool}
           openTool={openTool}
-          uid={uid}
           tool={tool}
           setTool={setTool}
-          options={options}
         />
       </Grid.Row>
 
-      <GridWrapper>
+      <Card.Group>
         {projects.map((item) => (
           <ProjectCard key={item.id} project={item} />
         ))}
-      </GridWrapper>
+      </Card.Group>
     </Layout>
   );
 };

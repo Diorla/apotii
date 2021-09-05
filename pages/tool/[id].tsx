@@ -1,15 +1,19 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React from "react";
-import { Breadcrumb } from "semantic-ui-react";
+import React, { useState } from "react";
+import { Breadcrumb, Button } from "semantic-ui-react";
 import Layout from "../../components/Layout";
+import ToolForm from "../../components/ToolForm";
 import { useUser } from "../../context";
+import ToolProps from "../../types/ToolProps";
 
 export default function Category() {
   const router = useRouter();
   const { id } = router.query;
   const { tools, loadingTools } = useUser();
   const tool = tools.filter((item) => item.id === id);
+  const [open, setOpen] = useState(false);
+  const [currentTool, setCurrentTool] = useState<ToolProps>(tool[0] || {});
   if (loadingTools) return <div>Loading tools</div>;
   return (
     <Layout path="Tools">
@@ -26,6 +30,13 @@ export default function Category() {
           <div>Description: {tool[0].description} </div>
           <div>Category: {tool[0].category} </div>
           <div>Rating: {tool[0].rating} </div>
+          <ToolForm
+            setOpenTool={setOpen}
+            openTool={open}
+            tool={currentTool}
+            setTool={setCurrentTool}
+            title="Edit tool"
+          />
         </div>
       ) : (
         <div>No tools in this categories</div>

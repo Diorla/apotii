@@ -2,7 +2,7 @@ import React from "react";
 import { useUser } from "../context";
 import SignInForm from "./SignInForm";
 import Link from "next/link";
-import { Menu, Input } from "semantic-ui-react";
+import { Menu, Input, Grid } from "semantic-ui-react";
 
 const Layout = ({
   children,
@@ -33,7 +33,7 @@ const Layout = ({
             <Menu.Item name="logout" onClick={() => console.log("logout")} />
           </Menu.Menu>
         </Menu>
-        <div>{children}</div>
+        <Grid>{children}</Grid>
       </div>
     );
   return <SignInForm />;

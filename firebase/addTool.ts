@@ -9,7 +9,7 @@ export default function addTool(
 ): 0 | undefined {
   const db = firebase.firestore();
   if (!tool.name) return 0;
-  const id = v4();
+  const id = tool.id || v4();
   db.doc(`users/${userId}/tools/${id}`)
     .set(
       {
@@ -19,6 +19,6 @@ export default function addTool(
       },
       { merge: true }
     )
-    .then(() => callback)
+    .then(callback)
     .catch((err) => console.error(err.message));
 }

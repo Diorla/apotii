@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
-import { Breadcrumb, List } from "semantic-ui-react";
+import { Breadcrumb, Card, Grid, List } from "semantic-ui-react";
+import CategoryCard from "../../components/CategoryCard";
 import Layout from "../../components/Layout";
+import ToolCard from "../../components/ToolCard";
 import { useUser } from "../../context";
 
 export default function Category() {
@@ -14,29 +16,21 @@ export default function Category() {
   if (loadingTools) return <div>Loading tools</div>;
   return (
     <Layout path="Categories">
-      <Breadcrumb>
-        <Link href="/categories" passHref>
-          <Breadcrumb.Section link>Categories</Breadcrumb.Section>
-        </Link>
-        <Breadcrumb.Divider />
-        <Breadcrumb.Section active>{id}</Breadcrumb.Section>
-      </Breadcrumb>
+      <Grid.Row>
+        <Breadcrumb>
+          <Link href="/categories" passHref>
+            <Breadcrumb.Section link>Categories</Breadcrumb.Section>
+          </Link>
+          <Breadcrumb.Divider />
+          <Breadcrumb.Section active>{id}</Breadcrumb.Section>
+        </Breadcrumb>
+      </Grid.Row>
       {filteredTools.length ? (
-        <div>
-          <List>
-            {filteredTools.map((item) => (
-              <List.Content key={item.id}>
-                <List.Header>
-                  <Link href={`/tool/${item.id}`} passHref>
-                    {item.name}
-                  </Link>
-                </List.Header>
-
-                <List.Description>{item.description}</List.Description>
-              </List.Content>
-            ))}
-          </List>
-        </div>
+        <Card.Group>
+          {filteredTools.map((item) => (
+            <ToolCard tool={item} key={item.id} />
+          ))}
+        </Card.Group>
       ) : (
         <div>No tools in this categories</div>
       )}
