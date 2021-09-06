@@ -1,4 +1,4 @@
-import ToolProps from "../types/ToolProps";
+import ToolProps from "../types/ToolProp";
 import select from "./select";
 
 export default function filterTopTwo(list: ToolProps[]): ToolProps[] {

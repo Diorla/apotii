@@ -2,7 +2,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { Button, Card } from "semantic-ui-react";
 import { ConfirmState } from "../types/ConfirmProps";
-import ToolProps from "../types/ToolProps";
+import ToolProps from "../types/ToolProp";
 import Confirm from "./Confirm";
 import firebase from "../firebase/init";
 import { useUser } from "../context";

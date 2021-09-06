@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Form, Rating, Select, TextArea } from "semantic-ui-react";
 import FormModal from "./FormModal";
-import ToolProps from "../types/ToolProps";
+import ToolProps from "../types/ToolProp";
 import addTool from "../firebase/addTool";
 import { useUser } from "../context";
 

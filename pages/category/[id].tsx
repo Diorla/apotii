@@ -7,7 +7,7 @@ import Layout from "../../components/Layout";
 import ToolCard from "../../components/ToolCard";
 import ToolForm from "../../components/ToolForm";
 import { useUser } from "../../context";
-import ToolProps from "../../types/ToolProps";
+import ToolProps from "../../types/ToolProp";
 
 export default function Category() {
   const router = useRouter();

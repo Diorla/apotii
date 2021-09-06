@@ -1,6 +1,6 @@
 import firebase from "./init";
 import { v4 } from "uuid";
-import ToolProps from "../types/ToolProps";
+import ToolProps from "../types/ToolProp";
 
 export default function addTool(
   userId: string,

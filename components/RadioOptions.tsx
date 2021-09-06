@@ -1,5 +1,5 @@
 import { Form, Icon, Radio } from "semantic-ui-react";
-import ToolProps from "../types/ToolProps";
+import ToolProps from "../types/ToolProp";
 import React, { useState } from "react";
 import toolsType from "../types/toolsType";
 import createInitialToolList from "../scripts/createInitialToolList";

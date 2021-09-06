@@ -3,7 +3,7 @@ import { useUser } from "../../context";
 import Layout from "../../components/Layout";
 import { Breadcrumb, Button, Card, Grid, Icon, List } from "semantic-ui-react";
 import Link from "next/link";
-import ToolProps from "../../types/ToolProps";
+import ToolProps from "../../types/ToolProp";
 import React, { useEffect, useState } from "react";
 import addProject from "../../firebase/addProject";
 import toolsType from "../../types/toolsType";
