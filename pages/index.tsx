@@ -10,12 +10,11 @@ import CategoryProps from "../types/CategoryProps";
 import ProjectForm from "../components/ProjectForm";
 import CategoryForm from "../components/CategoryForm";
 import ToolForm from "../components/ToolForm";
-import styled from "styled-components";
 
 const Home: NextPage = () => {
   const {
     user,
-    user: { uid, categories = [] },
+    user: { uid },
     projects,
     loadingProjects,
   } = useUser();
@@ -42,10 +41,6 @@ const Home: NextPage = () => {
   });
   const [openCategory, setOpenCategory] = useState(false);
 
-  const categoryError = categories
-    .map((item) => item.name)
-    .includes(category.name);
-
   if (loadingProjects) return <div>Projects loading</div>;
   return (
     <Layout path="Projects">
@@ -60,9 +55,7 @@ const Home: NextPage = () => {
         <CategoryForm
           setOpenCategory={setOpenCategory}
           openCategory={openCategory}
-          user={user}
           category={category}
-          categoryError={categoryError}
           setCategory={setCategory}
         />
         <ToolForm

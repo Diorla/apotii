@@ -3,23 +3,26 @@ import { Button, Form, TextArea } from "semantic-ui-react";
 import FormModal from "./FormModal";
 import CategoryProps from "../types/CategoryProps";
 import addCategory from "../firebase/addCategory";
-import UserProps from "../types/UserProps";
+import { useUser } from "../context";
 
 export default function CategoryForm({
   setOpenCategory,
   openCategory,
-  user,
   category,
-  categoryError,
   setCategory,
 }: {
   setOpenCategory: React.Dispatch<React.SetStateAction<boolean>>;
   openCategory: boolean;
-  user: UserProps;
   category: CategoryProps;
-  categoryError: boolean;
   setCategory: React.Dispatch<React.SetStateAction<CategoryProps>>;
 }) {
+  const {
+    user,
+    user: { categories },
+  } = useUser();
+  const categoryError = categories
+    .map((item) => item.name)
+    .includes(category.name);
   return (
     <FormModal
       title="Create new category"

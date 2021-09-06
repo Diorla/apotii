@@ -1,12 +1,19 @@
 import type { NextPage } from "next";
-import { Card, List } from "semantic-ui-react";
+import { Card, Grid, List } from "semantic-ui-react";
 import { useUser } from "../context";
 import Layout from "../components/Layout";
-import React from "react";
+import React, { useState } from "react";
 import CategoryCard from "../components/CategoryCard";
 import updateCategory from "../firebase/updateCategory";
 import addTool from "../firebase/addTool";
+import CategoryForm from "../components/CategoryForm";
+import CategoryProps from "../types/CategoryProps";
 
+// TODO: Add category form
+/**
+ * A modal to create new category
+ * Another modal to add a tool to the current category
+ */
 const Categories: NextPage = () => {
   const {
     user,
@@ -14,6 +21,11 @@ const Categories: NextPage = () => {
     tools,
   } = useUser();
 
+  const [state, setState] = useState<CategoryProps>({
+    name: "",
+    description: "",
+  });
+  const [openModal, setOpenModal] = useState(false);
   const deleteCategory = (name: string) => {
     const tempCategory = categories.filter((item) => item.name !== name);
     updateCategory(user, tempCategory, () => {
@@ -29,19 +41,31 @@ const Categories: NextPage = () => {
   const miscLength = tools.filter((item) => item.category === "Misc").length;
   return (
     <Layout path="Categories">
+      <Grid.Row>
+        <CategoryForm
+          setOpenCategory={setOpenModal}
+          openCategory={openModal}
+          category={state}
+          setCategory={setState}
+        />
+      </Grid.Row>
       <Card.Group>
         {miscLength && (
           <CategoryCard
             category={{ name: "Misc", description: "Default category" }}
           />
         )}
-        {categories.map((category, idx) => (
-          <CategoryCard
-            category={category}
-            key={idx}
-            deleteFn={() => deleteCategory(category.name)}
-          />
-        ))}
+        {categories
+          .sort((prev, next) =>
+            prev.name.toLowerCase() > next.name.toLowerCase() ? 1 : -1
+          )
+          .map((category, idx) => (
+            <CategoryCard
+              category={category}
+              key={idx}
+              deleteFn={() => deleteCategory(category.name)}
+            />
+          ))}
       </Card.Group>
     </Layout>
   );
