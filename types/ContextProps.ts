@@ -1,5 +1,5 @@
 import ProjectProps from "./ProjectProps";
-import ToolProps from "./ToolProp";
+import ToolProps from "./ToolProps";
 import UserProps from "./UserProps";
 
 // Practically all the data that will be rendered

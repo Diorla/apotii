@@ -5,7 +5,7 @@ import initialState from "./initialState";
 import fetchList from "../firebase/fetchList";
 import fetchUser from "../firebase/fetchUser";
 import ProjectProps from "../types/ProjectProps";
-import ToolProps from "../types/ToolProp";
+import ToolProps from "../types/ToolProps";
 import ContextProps from "../types/ContextProps";
 
 export const UserContext = createContext(initialState);

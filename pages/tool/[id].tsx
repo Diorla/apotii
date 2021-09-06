@@ -5,7 +5,7 @@ import { Breadcrumb, Button } from "semantic-ui-react";
 import Layout from "../../components/Layout";
 import ToolForm from "../../components/ToolForm";
 import { useUser } from "../../context";
-import ToolProps from "../../types/ToolProp";
+import ToolProps from "../../types/ToolProps";
 
 export default function Category() {
   const router = useRouter();

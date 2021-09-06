@@ -1,4 +1,4 @@
-import ToolProps from "../types/ToolProp";
+import ToolProps from "../types/ToolProps";
 import toolsType from "../types/toolsType";
 
 export default function createInitialToolList(

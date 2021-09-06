@@ -5,7 +5,7 @@ import ProjectCard from "../components/ProjectCard";
 import ProjectProps from "../types/ProjectProps";
 import React, { useState } from "react";
 import { Card } from "semantic-ui-react";
-import ToolProps from "../types/ToolProp";
+import ToolProps from "../types/ToolProps";
 import CategoryProps from "../types/CategoryProps";
 import ProjectForm from "../components/ProjectForm";
 import CategoryForm from "../components/CategoryForm";

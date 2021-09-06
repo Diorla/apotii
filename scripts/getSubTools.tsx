@@ -1,4 +1,4 @@
-import ToolProps from "../types/ToolProp";
+import ToolProps from "../types/ToolProps";
 import filterTopTwo from "./filterTopTwo";
 
 export default function getSubTools(tools: ToolProps[], filtered: boolean) {
