@@ -35,7 +35,7 @@ export default function UserContextComp({
             .catch((err) => console.error(err));
         } else setUser(initialState.user);
       } catch (error) {
-        console.error(error.message);
+        console.error(error);
       }
     });
 

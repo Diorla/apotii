@@ -7,7 +7,13 @@ import Confirm from "./Confirm";
 import firebase from "../firebase/init";
 import { useUser } from "../context";
 
-export default function ToolCard({ tool }: { tool: ToolProps }) {
+export default function ToolCard({
+  tool,
+  deleteFn,
+}: {
+  tool: ToolProps;
+  deleteFn?: () => void;
+}) {
   const [current, setCurrent] = useState<ConfirmState>({
     header: "",
     message: "",
@@ -59,11 +65,13 @@ export default function ToolCard({ tool }: { tool: ToolProps }) {
             basic
             color="red"
             onClick={() =>
-              setCurrent({
-                header: `Delete ${tool.name}`,
-                message: `This action cannot be undone`,
-                open: true,
-              })
+              deleteFn
+                ? deleteFn()
+                : setCurrent({
+                    header: `Delete ${tool.name}`,
+                    message: `This action cannot be undone`,
+                    open: true,
+                  })
             }
           >
             Delete

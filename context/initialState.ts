@@ -6,7 +6,7 @@ const initialState: ContextProps = {
     displayName: "",
     email: "",
     photoURL: "",
-    category: [],
+    categories: [],
   },
   loadingUser: true,
   loadingProjects: true,
