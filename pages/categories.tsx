@@ -8,12 +8,8 @@ import updateCategory from "../firebase/updateCategory";
 import addTool from "../firebase/addTool";
 import CategoryForm from "../components/CategoryForm";
 import CategoryProps from "../types/CategoryProps";
+import firebase from "../firebase/init";
 
-// TODO: Add category form
-/**
- * A modal to create new category
- * Another modal to add a tool to the current category
- */
 const Categories: NextPage = () => {
   const {
     user,
@@ -29,18 +25,26 @@ const Categories: NextPage = () => {
   const deleteCategory = (name: string) => {
     const tempCategory = categories.filter((item) => item.name !== name);
     updateCategory(user, tempCategory, () => {
+      const db = firebase.firestore();
+      const batch = db.batch();
       tools.forEach((item) => {
         if (item.category === name) {
-          // TODO: Use batch write
           const tempTool = { ...item, category: "Misc" };
-          addTool(uid, tempTool, () => console.log(`${tempTool.name} updated`));
+          const docRef = db.doc(`users/${uid}/tools/${item.id}`);
+          batch.update(docRef, tempTool);
         }
       });
+      batch.commit().then((value) => console.log(value));
     });
   };
   const miscLength = tools.filter((item) => item.category === "Misc").length;
+  const [search, setSearch] = useState("");
   return (
-    <Layout path="Categories">
+    <Layout
+      path="Categories"
+      searchValue={search}
+      searchFn={(val) => setSearch(val)}
+    >
       <Grid.Row>
         <CategoryForm
           setOpenCategory={setOpenModal}
@@ -50,12 +54,17 @@ const Categories: NextPage = () => {
         />
       </Grid.Row>
       <Card.Group>
-        {miscLength && (
+        {miscLength && !search && (
           <CategoryCard
             category={{ name: "Misc", description: "Default category" }}
           />
         )}
         {categories
+          .filter((item) =>
+            `${item.name} ${item.description}`
+              .toLowerCase()
+              .includes(search.toLowerCase())
+          )
           .sort((prev, next) =>
             prev.name.toLowerCase() > next.name.toLowerCase() ? 1 : -1
           )

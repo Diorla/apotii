@@ -1,21 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { useUser } from "../context";
 import SignInForm from "./SignInForm";
 import Link from "next/link";
-import { Menu, Input, Grid } from "semantic-ui-react";
+import { Menu, Input, Grid, Container } from "semantic-ui-react";
 
 const Layout = ({
   children,
   path,
+  searchValue,
+  searchFn,
 }: {
   children: React.ReactNode;
   path: string;
+  searchValue?: string;
+  searchFn?: (e: string) => void;
 }) => {
   const { user, loadingUser } = useUser();
   if (loadingUser) return <div>App is loading</div>;
   if (user.uid)
     return (
-      <div>
+      <Container fluid>
         <Menu secondary>
           <Link href="/" passHref>
             <Menu.Item name="Home" active={path === "Projects"} />
@@ -27,14 +31,21 @@ const Layout = ({
             <Menu.Item name="Tools" active={path === "Tools"} />
           </Link>
           <Menu.Menu position="right">
-            <Menu.Item>
-              <Input icon="search" placeholder="Search..." />
-            </Menu.Item>
+            {searchFn && (
+              <Menu.Item>
+                <Input
+                  icon="search"
+                  placeholder="Search..."
+                  value={searchValue}
+                  onChange={(e) => searchFn(e.target.value)}
+                />
+              </Menu.Item>
+            )}
             <Menu.Item name="logout" onClick={() => console.log("logout")} />
           </Menu.Menu>
         </Menu>
         <Grid>{children}</Grid>
-      </div>
+      </Container>
     );
   return <SignInForm />;
 };

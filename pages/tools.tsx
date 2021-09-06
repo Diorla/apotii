@@ -16,9 +16,14 @@ export default function Tool() {
     category: "Misc",
     rating: 1,
   });
+  const [search, setSearch] = useState("");
   if (loadingTools) return <div>Loading tools</div>;
   return (
-    <Layout path="Tools">
+    <Layout
+      path="Tools"
+      searchValue={search}
+      searchFn={(val) => setSearch(val)}
+    >
       <Grid.Row>
         <ToolForm
           openTool={openTool}
@@ -29,9 +34,15 @@ export default function Tool() {
       </Grid.Row>
       {tools.length ? (
         <Card.Group>
-          {tools.map((item) => (
-            <ToolCard tool={item} key={item.id} />
-          ))}
+          {tools
+            .filter((item) =>
+              `${item.name} ${item.description} ${item.category}`
+                .toLowerCase()
+                .includes(search.toLowerCase())
+            )
+            .map((item) => (
+              <ToolCard tool={item} key={item.id} />
+            ))}
         </Card.Group>
       ) : (
         <div>No tools added yet</div>

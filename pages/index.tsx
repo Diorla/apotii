@@ -12,12 +12,7 @@ import CategoryForm from "../components/CategoryForm";
 import ToolForm from "../components/ToolForm";
 
 const Home: NextPage = () => {
-  const {
-    user,
-    user: { uid },
-    projects,
-    loadingProjects,
-  } = useUser();
+  const { projects, loadingProjects } = useUser();
   const [project, setProject] = useState<ProjectProps>({
     id: "",
     name: "",
@@ -40,15 +35,19 @@ const Home: NextPage = () => {
     description: "",
   });
   const [openCategory, setOpenCategory] = useState(false);
+  const [search, setSearch] = useState("");
 
   if (loadingProjects) return <div>Projects loading</div>;
   return (
-    <Layout path="Projects">
+    <Layout
+      path="Projects"
+      searchValue={search}
+      searchFn={(val) => setSearch(val)}
+    >
       <Grid.Row>
         <ProjectForm
           setOpenProjectModal={setOpenProjectModal}
           openProjectModal={openProjectModal}
-          uid={uid}
           project={project}
           setProject={setProject}
         />
@@ -67,9 +66,15 @@ const Home: NextPage = () => {
       </Grid.Row>
 
       <Card.Group>
-        {projects.map((item) => (
-          <ProjectCard key={item.id} project={item} />
-        ))}
+        {projects
+          .filter((item) =>
+            `${item.name} ${item.description}`
+              .toLowerCase()
+              .includes(search.toLowerCase())
+          )
+          .map((item) => (
+            <ProjectCard key={item.id} project={item} />
+          ))}
       </Card.Group>
     </Layout>
   );

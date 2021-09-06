@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Modal } from "semantic-ui-react";
+import ConfirmProps from "../types/ConfirmProps";
 
 export default function Confirm({
   header,
@@ -8,14 +9,7 @@ export default function Confirm({
   cancelFn,
   onClose,
   open,
-}: {
-  header: string;
-  message: string;
-  acceptFn: () => void;
-  cancelFn?: () => void;
-  onClose?: () => void;
-  open: boolean;
-}) {
+}: ConfirmProps) {
   return (
     <Modal size="tiny" open={open} onClose={onClose}>
       <Modal.Header>{header}</Modal.Header>

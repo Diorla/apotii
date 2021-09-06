@@ -1,26 +1,19 @@
 import ProjectProps from "../types/ProjectProps";
-import { Card, List, Button } from "semantic-ui-react";
+import { Card, Button } from "semantic-ui-react";
 import Link from "next/link";
 import firebase from "../firebase/init";
 import { useUser } from "../context";
 import Confirm from "./Confirm";
 import { useState } from "react";
-type currentType = {
-  header: string;
-  message: string;
-  open: boolean;
-};
+import ProjectList from "./ProjectList";
+import { ConfirmState } from "../types/ConfirmProps";
 
-const pluralize = (word: string, count?: number) => {
-  if (count && count > 1) return `${word}s`;
-  return word;
-};
 export default function ProjectCard({ project }: { project: ProjectProps }) {
   const { id, name, description, projectTools = [], modified } = project;
   const {
     user: { uid },
   } = useUser();
-  const [current, setCurrent] = useState<currentType>({
+  const [current, setCurrent] = useState<ConfirmState>({
     header: "",
     message: "",
     open: false,
@@ -65,15 +58,7 @@ export default function ProjectCard({ project }: { project: ProjectProps }) {
           Delete
         </Button>
       </Card.Content>
-      <Card.Content extra>
-        {projectTools.length ? (
-          <div>
-            {projectTools.length} {pluralize("tool", projectTools.length)} added
-          </div>
-        ) : (
-          <div>No tools added</div>
-        )}
-      </Card.Content>
+      <ProjectList list={projectTools} />
     </Card>
   );
 }

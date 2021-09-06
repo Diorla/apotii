@@ -3,20 +3,22 @@ import React from "react";
 import { Button, Form, TextArea } from "semantic-ui-react";
 import FormModal from "./FormModal";
 import addProject from "../firebase/addProject";
+import { useUser } from "../context";
 
 export default function ProjectForm({
   setOpenProjectModal,
   openProjectModal,
-  uid,
   project,
   setProject,
 }: {
   setOpenProjectModal: React.Dispatch<React.SetStateAction<boolean>>;
   openProjectModal: boolean;
-  uid: string;
   project: ProjectProps;
   setProject: React.Dispatch<React.SetStateAction<ProjectProps>>;
 }) {
+  const {
+    user: { uid },
+  } = useUser();
   return (
     <FormModal
       title="Create new project"
