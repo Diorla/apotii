@@ -4,12 +4,13 @@ import { useUser } from "../context";
 import ProjectCard from "../components/ProjectCard";
 import ProjectProps from "../types/ProjectProps";
 import React, { useState } from "react";
-import { Card, Grid } from "semantic-ui-react";
+import { Card } from "semantic-ui-react";
 import ToolProps from "../types/ToolProps";
 import CategoryProps from "../types/CategoryProps";
 import ProjectForm from "../components/ProjectForm";
 import CategoryForm from "../components/CategoryForm";
 import ToolForm from "../components/ToolForm";
+import ButtonWrapper from "../components/ButtonWrapper";
 
 const Home: NextPage = () => {
   const { projects, loadingProjects } = useUser();
@@ -44,7 +45,7 @@ const Home: NextPage = () => {
       searchValue={search}
       searchFn={(val) => setSearch(val)}
     >
-      <Grid.Row>
+      <ButtonWrapper>
         <ProjectForm
           setOpenProjectModal={setOpenProjectModal}
           openProjectModal={openProjectModal}
@@ -63,7 +64,7 @@ const Home: NextPage = () => {
           tool={tool}
           setTool={setTool}
         />
-      </Grid.Row>
+      </ButtonWrapper>
 
       <Card.Group>
         {projects

@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { useUser } from "../context";
 import SignInForm from "./SignInForm";
 import Link from "next/link";
-import { Menu, Input, Grid, Container } from "semantic-ui-react";
+import { Menu, Input, Container } from "semantic-ui-react";
+import Wrapper from "./Wrapper";
+import firebase from "../firebase/init";
 
 const Layout = ({
   children,
@@ -41,10 +43,13 @@ const Layout = ({
                 />
               </Menu.Item>
             )}
-            <Menu.Item name="logout" onClick={() => console.log("logout")} />
+            <Menu.Item
+              name="logout"
+              onClick={() => firebase.auth().signOut()}
+            />
           </Menu.Menu>
         </Menu>
-        <Grid>{children}</Grid>
+        <Wrapper>{children}</Wrapper>
       </Container>
     );
   return <SignInForm />;

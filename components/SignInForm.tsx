@@ -1,10 +1,18 @@
-import React, { useState } from "react";
-import { Button, Form } from "semantic-ui-react";
+import React from "react";
+import { Button } from "semantic-ui-react";
+import styled from "styled-components";
 import firebase from "../firebase/init";
+
+const Wrapper = styled.div`
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+`;
 
 export function signInWithGoogle(callback?: () => void): void {
   const provider = new firebase.auth.GoogleAuthProvider();
-
   firebase
     .auth()
     .signInWithPopup(provider)
@@ -37,26 +45,12 @@ export function signUpWithEmail(
 }
 
 const SignInForm = () => {
-  const [isNew, setIsNew] = useState(false);
-
-  const enterApp = () => {
-    if (isNew) signUpWithEmail("", "");
-    else signInWithEmail("", "");
-  };
   return (
-    <div>
-      <Button onClick={() => signInWithGoogle()}>Google sign in</Button>
-      <Button onClick={() => setIsNew(!isNew)}>
-        {isNew ? "Already a member" : "New User"}
+    <Wrapper>
+      <Button color="google plus" onClick={() => signInWithGoogle()}>
+        Google sign in
       </Button>
-      <Form onSubmit={(data) => console.log({ data })}>
-        <form>
-          <Button type="submit" appearance="primary">
-            {isNew ? "Sign in" : "Sign up"}
-          </Button>
-        </form>
-      </Form>
-    </div>
+    </Wrapper>
   );
 };
 

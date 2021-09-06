@@ -9,6 +9,7 @@ import addTool from "../firebase/addTool";
 import CategoryForm from "../components/CategoryForm";
 import CategoryProps from "../types/CategoryProps";
 import firebase from "../firebase/init";
+import ButtonWrapper from "../components/ButtonWrapper";
 
 const Categories: NextPage = () => {
   const {
@@ -45,14 +46,14 @@ const Categories: NextPage = () => {
       searchValue={search}
       searchFn={(val) => setSearch(val)}
     >
-      <Grid.Row>
+      <ButtonWrapper>
         <CategoryForm
           setOpenCategory={setOpenModal}
           openCategory={openModal}
           category={state}
           setCategory={setState}
         />
-      </Grid.Row>
+      </ButtonWrapper>
       <Card.Group>
         {miscLength && !search && (
           <CategoryCard

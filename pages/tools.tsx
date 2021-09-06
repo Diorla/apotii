@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Card, Grid, List } from "semantic-ui-react";
+import ButtonWrapper from "../components/ButtonWrapper";
 import Layout from "../components/Layout";
 import ToolCard from "../components/ToolCard";
 import ToolForm from "../components/ToolForm";
@@ -24,29 +25,31 @@ export default function Tool() {
       searchValue={search}
       searchFn={(val) => setSearch(val)}
     >
-      <Grid.Row>
+      <ButtonWrapper>
         <ToolForm
           openTool={openTool}
           setOpenTool={setOpenTool}
           tool={tool}
           setTool={setTool}
         />
+      </ButtonWrapper>
+      <Grid.Row>
+        {tools.length ? (
+          <Card.Group>
+            {tools
+              .filter((item) =>
+                `${item.name} ${item.description} ${item.category}`
+                  .toLowerCase()
+                  .includes(search.toLowerCase())
+              )
+              .map((item) => (
+                <ToolCard tool={item} key={item.id} />
+              ))}
+          </Card.Group>
+        ) : (
+          <div>No tools added yet</div>
+        )}
       </Grid.Row>
-      {tools.length ? (
-        <Card.Group>
-          {tools
-            .filter((item) =>
-              `${item.name} ${item.description} ${item.category}`
-                .toLowerCase()
-                .includes(search.toLowerCase())
-            )
-            .map((item) => (
-              <ToolCard tool={item} key={item.id} />
-            ))}
-        </Card.Group>
-      ) : (
-        <div>No tools added yet</div>
-      )}
     </Layout>
   );
 }
