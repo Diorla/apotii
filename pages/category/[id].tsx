@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import { Breadcrumb, Card, Container, Grid, List } from "semantic-ui-react";
-import CategoryCard from "../../components/CategoryCard";
+import { Breadcrumb, Card, Container } from "semantic-ui-react";
+import ButtonWrapper from "../../components/ButtonWrapper";
 import Layout from "../../components/Layout";
 import ToolCard from "../../components/ToolCard";
 import ToolForm from "../../components/ToolForm";
@@ -27,7 +27,7 @@ export default function Category() {
   return (
     <Layout path="Categories">
       <Container fluid>
-        <Grid.Row>
+        <ButtonWrapper>
           <Breadcrumb>
             <Link href="/categories" passHref>
               <Breadcrumb.Section link>Categories</Breadcrumb.Section>
@@ -35,13 +35,15 @@ export default function Category() {
             <Breadcrumb.Divider />
             <Breadcrumb.Section active>{id}</Breadcrumb.Section>
           </Breadcrumb>
-        </Grid.Row>
-        <ToolForm
-          openTool={openTool}
-          setOpenTool={setOpenTool}
-          tool={tool}
-          setTool={setTool}
-        />
+        </ButtonWrapper>
+        <ButtonWrapper>
+          <ToolForm
+            openTool={openTool}
+            setOpenTool={setOpenTool}
+            tool={tool}
+            setTool={setTool}
+          />
+        </ButtonWrapper>
         {filteredTools.length ? (
           <Card.Group>
             {filteredTools.map((item) => (

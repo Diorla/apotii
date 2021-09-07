@@ -12,6 +12,6 @@ export default async function fetchUser(
   return db
     .doc(`users/${userId}`)
     .onSnapshot((doc) =>
-      callback({ ...doc.data(), ...initialState.user, uid })
+      callback({ ...initialState.user, ...doc.data(), uid })
     );
 }

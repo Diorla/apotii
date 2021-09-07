@@ -5,7 +5,6 @@ import Layout from "../components/Layout";
 import React, { useState } from "react";
 import CategoryCard from "../components/CategoryCard";
 import updateCategory from "../firebase/updateCategory";
-import addTool from "../firebase/addTool";
 import CategoryForm from "../components/CategoryForm";
 import CategoryProps from "../types/CategoryProps";
 import firebase from "../firebase/init";
@@ -14,7 +13,7 @@ import ButtonWrapper from "../components/ButtonWrapper";
 const Categories: NextPage = () => {
   const {
     user,
-    user: { categories = [], uid },
+    user: { categories, uid },
     tools,
   } = useUser();
 
@@ -40,6 +39,7 @@ const Categories: NextPage = () => {
   };
   const miscLength = tools.filter((item) => item.category === "Misc").length;
   const [search, setSearch] = useState("");
+  console.log(user);
   return (
     <Layout
       path="Categories"
@@ -61,11 +61,11 @@ const Categories: NextPage = () => {
           />
         ) : null}
         {categories
-          .filter((item) =>
-            `${item.name} ${item.description}`
-              .toLowerCase()
-              .includes(search.toLowerCase())
-          )
+          // .filter((item) =>
+          //   `${item.name} ${item.description}`
+          //     .toLowerCase()
+          //     .includes(search.toLowerCase())
+          // )
           .sort((prev, next) =>
             prev.name.toLowerCase() > next.name.toLowerCase() ? 1 : -1
           )

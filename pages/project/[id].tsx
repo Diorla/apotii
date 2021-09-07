@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useUser } from "../../context";
 import Layout from "../../components/Layout";
-import { Breadcrumb, Button, Card, Grid, Icon, List } from "semantic-ui-react";
+import { Breadcrumb, Button, Card } from "semantic-ui-react";
 import Link from "next/link";
 import ToolProps from "../../types/ToolProps";
 import React, { useEffect, useState } from "react";
@@ -11,6 +11,7 @@ import FormModal from "../../components/FormModal";
 import RadioOptions from "../../components/RadioOptions";
 import ToolCard from "../../components/ToolCard";
 import getSubTools from "../../scripts/getSubTools";
+import ButtonWrapper from "../../components/ButtonWrapper";
 
 const convertToolsListToObj = (tools: ToolProps[]) => {
   const toolsObj: { [key: string]: ToolProps } = {};
@@ -103,7 +104,7 @@ export default function Projects() {
     const { name, projectTools = [] } = project[0];
     return (
       <Layout path="Projects">
-        <Grid.Row>
+        <ButtonWrapper>
           <Breadcrumb>
             <Link href="/" passHref>
               <Breadcrumb.Section link>Projects</Breadcrumb.Section>
@@ -111,9 +112,9 @@ export default function Projects() {
             <Breadcrumb.Divider />
             <Breadcrumb.Section active>{name}</Breadcrumb.Section>
           </Breadcrumb>
-        </Grid.Row>
+        </ButtonWrapper>
 
-        <Grid.Row>
+        <ButtonWrapper>
           <FormModal
             title="Edit tools"
             trigger={
@@ -154,7 +155,7 @@ export default function Projects() {
               />
             ))}
           </FormModal>
-        </Grid.Row>
+        </ButtonWrapper>
         {projectTools.length ? (
           <Card.Group>
             {projectTools?.map((tool) => {
