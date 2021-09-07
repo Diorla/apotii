@@ -21,7 +21,7 @@ export default function RadioOptions({
     value: createInitialToolList(tools, initialList),
   });
   const handleChange = (value: string) => setState({ value });
-  const [expand, setExpand] = useState(true);
+  const [expand, setExpand] = useState(false);
   const expandStyle = { display: expand ? "initial" : "none" };
 
   return (

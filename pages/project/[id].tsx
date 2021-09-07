@@ -164,6 +164,7 @@ export default function Projects() {
                   <ToolCard
                     tool={toolsObj[tool.toolID]}
                     key={tool.toolID}
+                    deleteText="Remove tool"
                     deleteFn={() => removeTool(tool.toolID)}
                   />
                 );

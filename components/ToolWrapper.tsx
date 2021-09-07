@@ -1,3 +1,5 @@
+import Link from "next/link";
+import React from "react";
 import { Card, Rating } from "semantic-ui-react";
 import styled from "styled-components";
 import ToolProps from "../types/ToolProps";
@@ -23,7 +25,11 @@ export default function ToolWrapper({
       >
         <Card.Content>
           <Card.Header>{tool.name}</Card.Header>
-          <Card.Meta>{tool.category}</Card.Meta>
+          <Card.Meta>
+            <Link href={`/category/${tool.category}`} passHref>
+              {tool.category}
+            </Link>
+          </Card.Meta>
           <Card.Description>
             {tool.description || "No description provided"}
           </Card.Description>

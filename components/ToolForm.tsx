@@ -38,13 +38,13 @@ export default function ToolForm({
       toggleModal={setOpenTool}
       submit={() =>
         addTool(uid, tool, () => {
-          setOpenTool(false);
+          tool.id && setOpenTool(false);
           // If it is add a new tool, then reset it
           !tool.id &&
             setTool({
               id: "",
               name: "",
-              category: "",
+              category: tool.category,
               rating: 1,
               description: "",
             });

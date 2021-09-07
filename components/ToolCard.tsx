@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React, { useState } from "react";
-import { Button, Card } from "semantic-ui-react";
+import { Button, Card, Rating } from "semantic-ui-react";
 import { ConfirmState } from "../types/ConfirmProps";
 import ToolProps from "../types/ToolProps";
 import Confirm from "./Confirm";
@@ -10,9 +10,11 @@ import { useUser } from "../context";
 export default function ToolCard({
   tool,
   deleteFn,
+  deleteText,
 }: {
   tool: ToolProps;
   deleteFn?: () => void;
+  deleteText?: string;
 }) {
   const [current, setCurrent] = useState<ConfirmState>({
     header: "",
@@ -51,7 +53,19 @@ export default function ToolCard({
       />
       <Card.Content>
         <Card.Header>{tool.name}</Card.Header>
-        <Card.Meta>{tool.category}</Card.Meta>
+        <Card.Meta>
+          <Rating
+            maxRating={5}
+            defaultRating={tool.rating}
+            icon="star"
+            disabled
+          />
+          <div>
+            <Link href={`/category/${tool.category}`} passHref>
+              {tool.category}
+            </Link>
+          </div>
+        </Card.Meta>
         <Card.Description>{tool.description}</Card.Description>
       </Card.Content>
       <Card.Content extra>
@@ -74,7 +88,7 @@ export default function ToolCard({
                   })
             }
           >
-            Delete
+            {deleteText || "Delete"}
           </Button>
         </div>
       </Card.Content>
