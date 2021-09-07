@@ -27,12 +27,16 @@ export default function UserContextComp({
       try {
         if (user && user.uid) {
           fetchUser(user.uid, user, setUser).then(() => setLoadingUser(false));
-          fetchList(user.uid, "projects", setProjects)
-            .then(() => setLoadingProjects(false))
-            .catch((err) => console.error(err));
-          fetchList(user.uid, "tools", setTools)
-            .then(() => setLoadingTools(false))
-            .catch((err) => console.error(err));
+
+          fetchList(user.uid, "projects", (data) => {
+            setProjects(data);
+            setLoadingProjects(false);
+          }).catch((err) => console.error(err));
+
+          fetchList(user.uid, "tools", (data) => {
+            setTools(data);
+            setLoadingTools(false);
+          }).catch((err) => console.error(err));
         } else setUser(initialState.user);
       } catch (error) {
         console.error(error);
@@ -42,6 +46,8 @@ export default function UserContextComp({
     return () => unsubscriber();
   }, []);
 
+  // console.log({ user, projects, tools });
+  // console.log({ loadingTools, loadingProjects, loadingUser });
   return (
     <UserContext.Provider
       value={{

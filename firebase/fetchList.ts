@@ -1,7 +1,7 @@
 import firebase from "./init";
 
 /**
- * Used to fetch and monitor if there are any changes
+ * Used to fetch and monitor if there are any changes to firebase collections
  * @param userId the user id
  * @param callback it will contain array of all activities
  */
@@ -14,11 +14,14 @@ export default async function fetchList(
 
   const collectionRef = db.collection(`users/${userId}/${type}`);
 
-  collectionRef.onSnapshot((querySnapshot) => {
-    const tempArray: any[] = [];
-    querySnapshot.forEach((doc: any) => {
-      tempArray.push(doc.data());
-    });
-    callback(tempArray);
-  });
+  collectionRef.onSnapshot(
+    (querySnapshot) => {
+      const tempArray: any[] = [];
+      querySnapshot.forEach((doc: any) => {
+        tempArray.push(doc.data());
+      });
+      callback(tempArray);
+    },
+    (err) => console.error(err)
+  );
 }
