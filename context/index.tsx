@@ -37,7 +37,12 @@ export default function UserContextComp({
             setTools(data);
             setLoadingTools(false);
           }).catch((err) => console.error(err));
-        } else setUser(initialState.user);
+        } else {
+          setUser(initialState.user);
+          setLoadingProjects(false);
+          setLoadingUser(false);
+          setLoadingTools(false);
+        }
       } catch (error) {
         console.error(error);
       }
@@ -46,8 +51,6 @@ export default function UserContextComp({
     return () => unsubscriber();
   }, []);
 
-  // console.log({ user, projects, tools });
-  // console.log({ loadingTools, loadingProjects, loadingUser });
   return (
     <UserContext.Provider
       value={{

@@ -38,7 +38,8 @@ const Home: NextPage = () => {
   const [openCategory, setOpenCategory] = useState(false);
   const [search, setSearch] = useState("");
 
-  if (loadingProjects) return <div>Projects loading</div>;
+  if (loadingProjects)
+    return <Layout path="Projects">Project is loading</Layout>;
   return (
     <Layout
       path="Projects"

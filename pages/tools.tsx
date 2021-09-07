@@ -18,7 +18,7 @@ export default function Tool() {
     rating: 1,
   });
   const [search, setSearch] = useState("");
-  if (loadingTools) return <div>Loading tools</div>;
+  if (loadingTools) return <Layout path="Tools">Loading tools</Layout>;
   return (
     <Layout
       path="Tools"

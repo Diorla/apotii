@@ -55,11 +55,11 @@ const Categories: NextPage = () => {
         />
       </ButtonWrapper>
       <Card.Group>
-        {miscLength && !search && (
+        {miscLength && !search ? (
           <CategoryCard
             category={{ name: "Misc", description: "Default category" }}
           />
-        )}
+        ) : null}
         {categories
           .filter((item) =>
             `${item.name} ${item.description}`
