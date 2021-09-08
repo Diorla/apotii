@@ -19,7 +19,9 @@ export default function addCategory(
         displayName,
         email,
         photoURL,
-        categories: [...categories, category],
+        categories: [...categories, category].sort((prev, next) =>
+          prev.name.toLowerCase() > next.name.toLowerCase() ? 1 : -1
+        ),
       },
       { merge: true }
     )

@@ -29,12 +29,20 @@ export default function UserContextComp({
           fetchUser(user.uid, user, setUser).then(() => setLoadingUser(false));
 
           fetchList(user.uid, "projects", (data) => {
-            setProjects(data);
+            setProjects(
+              data.sort((prev, next) =>
+                prev.name.toLowerCase() > next.name.toLowerCase() ? 1 : -1
+              )
+            );
             setLoadingProjects(false);
           }).catch((err) => console.error(err));
 
           fetchList(user.uid, "tools", (data) => {
-            setTools(data);
+            setTools(
+              data.sort((prev, next) =>
+                prev.name.toLowerCase() > next.name.toLowerCase() ? 1 : -1
+              )
+            );
             setLoadingTools(false);
           }).catch((err) => console.error(err));
         } else {

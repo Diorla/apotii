@@ -4,6 +4,7 @@ import FormModal from "./FormModal";
 import CategoryProps from "../types/CategoryProps";
 import addCategory from "../firebase/addCategory";
 import { useUser } from "../context";
+import { toast } from "react-toastify";
 
 export default function CategoryForm({
   setOpenCategory,
@@ -35,6 +36,7 @@ export default function CategoryForm({
       toggleModal={setOpenCategory}
       submit={() =>
         addCategory(user, category, categoryError, () => {
+          toast.success(`${category.name} added`);
           setOpenCategory(false);
           setCategory({
             name: "",

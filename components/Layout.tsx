@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Menu, Input, Container } from "semantic-ui-react";
 import Wrapper from "./Wrapper";
 import firebase from "../firebase/init";
+import { ToastContainer } from "react-toastify";
 
 const Layout = ({
   children,
@@ -49,7 +50,10 @@ const Layout = ({
             />
           </Menu.Menu>
         </Menu>
-        <Wrapper>{children}</Wrapper>
+        <Wrapper>
+          <ToastContainer />
+          {children}
+        </Wrapper>
       </Container>
     );
   return <SignInForm />;

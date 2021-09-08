@@ -1,10 +1,12 @@
 import Link from "next/link";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 import { Button, Card } from "semantic-ui-react";
 import { useUser } from "../context";
 import CategoryProps from "../types/CategoryProps";
 import { ConfirmState } from "../types/ConfirmProps";
 import Confirm from "./Confirm";
+import Description from "./Description";
 
 export default function CategoryCard({
   category,
@@ -35,6 +37,7 @@ export default function CategoryCard({
             open: false,
           });
           deleteFn && deleteFn();
+          deleteFn && toast.error(`${category.name} deleted`);
         }}
         cancelFn={() =>
           setCurrent({
@@ -47,7 +50,9 @@ export default function CategoryCard({
       <Card.Content>
         <Card.Header>{category.name}</Card.Header>
         <Card.Meta>{length} tools</Card.Meta>
-        <Card.Description>{category.description}</Card.Description>
+        <Card.Description>
+          <Description description={category.description} />
+        </Card.Description>
       </Card.Content>
       <Card.Content extra>
         <div className="ui two buttons">

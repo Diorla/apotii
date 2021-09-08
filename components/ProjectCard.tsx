@@ -4,9 +4,11 @@ import Link from "next/link";
 import firebase from "../firebase/init";
 import { useUser } from "../context";
 import Confirm from "./Confirm";
-import { useState } from "react";
+import React, { useState } from "react";
 import ProjectList from "./ProjectList";
 import { ConfirmState } from "../types/ConfirmProps";
+import Description from "./Description";
+import { toast } from "react-toastify";
 
 export default function ProjectCard({ project }: { project: ProjectProps }) {
   const { id, name, description, projectTools = [], modified } = project;
@@ -25,7 +27,11 @@ export default function ProjectCard({ project }: { project: ProjectProps }) {
         header={current.header}
         message={current.message}
         acceptFn={() =>
-          firebase.firestore().doc(`users/${uid}/projects/${id}`).delete()
+          firebase
+            .firestore()
+            .doc(`users/${uid}/projects/${id}`)
+            .delete()
+            .then(() => toast.error(`${project.name} deleted`))
         }
         cancelFn={() =>
           setCurrent({
@@ -38,7 +44,7 @@ export default function ProjectCard({ project }: { project: ProjectProps }) {
       <Card.Content header={name} />
       <Card.Content>
         <Card.Meta>{new Date(modified).toDateString()}</Card.Meta>
-        <Card.Content description={description} />
+        <Card.Content description={<Description description={description} />} />
         <Link href={`project/${id}`} passHref>
           <Button size="mini" primary>
             Open

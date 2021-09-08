@@ -4,6 +4,7 @@ import FormModal from "./FormModal";
 import ToolProps from "../types/ToolProps";
 import addTool from "../firebase/addTool";
 import { useUser } from "../context";
+import { toast } from "react-toastify";
 
 export default function ToolForm({
   setOpenTool,
@@ -39,13 +40,15 @@ export default function ToolForm({
       submit={() =>
         addTool(uid, tool, () => {
           tool.id && setOpenTool(false);
+          tool.id && toast.success(`${tool.name} updated`);
+          !tool.id && toast.success(`${tool.name} added`);
           // If it is add a new tool, then reset it
           !tool.id &&
             setTool({
               id: "",
               name: "",
               category: tool.category,
-              rating: 1,
+              rating: tool.rating,
               description: "",
             });
         })

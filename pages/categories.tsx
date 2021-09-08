@@ -61,13 +61,10 @@ const Categories: NextPage = () => {
           />
         ) : null}
         {categories
-          // .filter((item) =>
-          //   `${item.name} ${item.description}`
-          //     .toLowerCase()
-          //     .includes(search.toLowerCase())
-          // )
-          .sort((prev, next) =>
-            prev.name.toLowerCase() > next.name.toLowerCase() ? 1 : -1
+          .filter((item) =>
+            `${item.name} ${item.description}`
+              .toLowerCase()
+              .includes(search.toLowerCase())
           )
           .map((category, idx) => (
             <CategoryCard

@@ -4,6 +4,7 @@ import { Button, Form, TextArea } from "semantic-ui-react";
 import FormModal from "./FormModal";
 import addProject from "../firebase/addProject";
 import { useUser } from "../context";
+import { toast } from "react-toastify";
 
 export default function ProjectForm({
   setOpenProjectModal,
@@ -31,6 +32,7 @@ export default function ProjectForm({
       toggleModal={setOpenProjectModal}
       submit={() =>
         addProject(uid, project, () => {
+          toast.success(`${project.name} added`);
           setOpenProjectModal(false);
           setProject({
             id: "",

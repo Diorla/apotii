@@ -6,6 +6,8 @@ import ToolProps from "../types/ToolProps";
 import Confirm from "./Confirm";
 import firebase from "../firebase/init";
 import { useUser } from "../context";
+import Description from "./Description";
+import { toast } from "react-toastify";
 
 export default function ToolCard({
   tool,
@@ -41,7 +43,8 @@ export default function ToolCard({
                 message: "",
                 open: false,
               })
-            );
+            )
+            .then(() => toast.error(`${tool.name} deleted`));
         }}
         cancelFn={() =>
           setCurrent({
@@ -66,7 +69,9 @@ export default function ToolCard({
             </Link>
           </div>
         </Card.Meta>
-        <Card.Description>{tool.description}</Card.Description>
+        <Card.Description>
+          <Description description={tool.description} />
+        </Card.Description>
       </Card.Content>
       <Card.Content extra>
         <div className="ui two buttons">
