@@ -34,20 +34,23 @@ export default function RadioOptions({
         {expand ? <Icon name="caret down" /> : <Icon name="caret right" />}
       </Form.Field>
       <div style={expandStyle}>
-        {tools.map((item) => (
-          <Form.Field key={item.id}>
-            <Radio
-              label={item.name}
-              name="radioGroup"
-              value={state.value}
-              checked={state.value === item.id}
-              onChange={() => {
-                updateList(state.value, item.id);
-                handleChange(item.id);
-              }}
-            />
-          </Form.Field>
-        ))}
+        {tools.map((item) => {
+          if (item)
+            return (
+              <Form.Field key={item.id}>
+                <Radio
+                  label={item.name}
+                  name="radioGroup"
+                  value={state.value}
+                  checked={state.value === item.id}
+                  onChange={() => {
+                    updateList(state.value, item.id);
+                    handleChange(item.id);
+                  }}
+                />
+              </Form.Field>
+            );
+        })}
       </div>
     </Form>
   );

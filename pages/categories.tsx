@@ -9,6 +9,7 @@ import CategoryForm from "../components/CategoryForm";
 import CategoryProps from "../types/CategoryProps";
 import firebase from "../firebase/init";
 import ButtonWrapper from "../components/ButtonWrapper";
+import { toast } from "react-toastify";
 
 const Categories: NextPage = () => {
   const {
@@ -34,12 +35,12 @@ const Categories: NextPage = () => {
           batch.update(docRef, tempTool);
         }
       });
-      batch.commit().then((value) => console.log(value));
+      batch.commit().then(() => toast("Category deleted"));
     });
   };
   const miscLength = tools.filter((item) => item.category === "Misc").length;
   const [search, setSearch] = useState("");
-  console.log(user);
+
   return (
     <Layout
       path="Categories"
